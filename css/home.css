@@ -1,0 +1,50 @@
+html,
+body {
+    height: 100%;
+}
+
+body.multiColor {
+    -webkit-animation: bodyBackground 20s cubic-bezier(1, 0, 0, 1) infinite;
+    animation: bodyBackground 20s cubic-bezier(1, 0, 0, 1) infinite;
+}
+div.header-content{
+    -webkit-animation: jumbotronBackground 20s cubic-bezier(1,0,0,1) infinite;
+    animation: jumbotronBackground 20s cubic-bezier(1,0,0,1) infinite;
+}
+
+@-webkit-keyframes  bodyBackground {
+    0% { background-color: #45a3e5; }
+    34% { background-color: #66bf39; }
+    67% { background-color: #eb670f; }
+    100% { background-color: #864cbf; }
+}
+
+@keyframes bodyBackground {
+    0% { background-color: #45a3e5; }
+    34% { background-color: #66bf39; }
+    67% { background-color: #eb670f; }
+    100% { background-color: #864cbf; }
+}
+
+
+@-webkit-keyframes  jumbotronBackground {
+
+    0% { background-color: #3cc; }
+    34% { background-color: #9cbf64; }
+    67% { background-color: #ffa602; }
+    100% { background-color: #ec41ff; }
+}
+
+@keyframes jumbotronBackground {
+    0% { background-color: #3cc; }
+    34% { background-color: #9cbf64; }
+    67% { background-color: #ffa602; }
+    100% { background-color: #ec41ff; }
+}
+
+.backgroundGreen{
+    background-color: #66bf39;
+}
+.backgroundOrange{
+    background-color: #ffa602;
+}
