@@ -45,6 +45,7 @@ $(function(){
                 publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
                 subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
                 uuid : nameStudent,
+                ssl  : true,
                 error: function (error) {
                     console.log('Error:', error);
                 }
