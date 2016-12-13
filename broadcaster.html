@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/broadcaster.js"></script>
+
+    <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+    <script src="js/libs/webrtc.js"></script>
+    <script src="js/rtc-controller.js"></script>
+</head>
+<body class="multiColor">
+
+<div id="header-content-broadcaster" class="header-content jumbotron text-center">
+    <h1>My First Bootstrap Page</h1>
+    <!--<p>Resize this responsive page to see the effect!</p>-->
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="answer-content col-sm-12" style="z-index: 5">
+            <div class="dv-launch text-center">
+                <button id="launch" class="btn btn-primary btn-lg sharp">Launch &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+            </div>
+
+            <div class="dv-next pull-right text-right" style="display: none">
+                <button id="next-slide" class="btn btn-primary">Next &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+            </div>
+
+        </div>
+
+        <div id="loading-page" style="display: none" class="col-sm-12">
+            <img src="images/banner_welcom.png" class="images-slides">
+        </div>
+
+        <div id="first-page" style="display: none" class="col-sm-12 row">
+            <div class="dvStream col-sm-2 text-center">
+                <button style="pointer-events: none" type="button" class="btn btn-info">Players &nbsp;<span class="player-here-now badge">0</span></button>
+            </div>
+
+
+            <div class="col-sm-8 text-center row" style="margin: 10px 0 10px 0">
+                <div id="video-stream" class="col-sm-12 text-center"></div>
+                <div id="stream-info" hidden="true" class="dvStream">
+                    <button id="end-stream" class="btn btn-danger" hidden="true">Done</button>
+                    <span class="glyphicon glyphicon-user" title="Animators"></span>
+                    <span id="here-now">0</span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-2 text-center dvStream">
+                <button id="start-now" disabled="disabled" class="btn btn-primary">Start now &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+            </div>
+        </div>
+
+
+        <div class="slides-content col-sm-12 row">
+            <div class="col-sm-3">&nbsp;</div>
+            <div id="slides-content" class="col-sm-6">&nbsp;</div>
+            <div class="col-sm-3">&nbsp;</div>
+        </div>
+
+        <div id="responses" class="slides-content col-sm-12 row">
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/viewer.js"></script>
+
+    <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+    <script src="js/libs/webrtc.js"></script>
+    <script src="js/rtc-controller.js"></script>
+
+</head>
+<body class="multiColor">
+
+<div id="header-content-viewer" class="jumbotron text-center hidden">
+    <h1>My First Bootstrap Page</h1>
+    <p>Resize this responsive page to see the effect!</p>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div id="loading-student" class="col-sm-12 text-center" style="margin-top: 40px"></div>
+
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin">
+
+                <label for="select-role">Select role:</label>
+                <select class="form-control" id="select-role">
+                    <option value="animator">Animator</option>
+                    <option value="student">Student</option>
+                    <option value="viewer">Viewer</option>
+                </select><br>
+
+                <input type="text" id="code-channel" class="form-control" placeholder="Code pin" required>
+
+                <input type="text" disabled="disabled" id="name-student" class="form-control" placeholder="Your name" required>
+
+                <button id="joint-stream" class="btn btn-lg btn-primary btn-block btn-signin" type="button">Joint</button>
+            </form><!-- /form -->
+
+        </div><!-- /card-container -->
+
+        <div style="margin-top: 40px" class="col-sm-12 text-center row">
+            <div id="dvContentVideo" style="margin: auto"></div>
+            <div id="video-stream" class="col-sm-12 text-center"></div>
+            <div id="stream-info" hidden="true" class="dvStream">
+                <!--<button id="end" class="btn btn-danger" onclick="end()" hidden="true">Done</button>-->
+                <span class="glyphicon glyphicon-user" title="Animators"></span>
+                <span id="here-now">0</span>
+            </div>
+        </div>
+
+
+        <div class="col-sm-12 answers-students">
+            <div id="responses-student" class="row">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
