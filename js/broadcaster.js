@@ -489,7 +489,7 @@ $(function(){
         $('#video-stream').addClass('dvCircle');
         $('#video-stream video').addClass('vid-small');
         $('div#header-content-broadcaster').html('<h1>'+object+' </h1>');
-        $('div#slides-content').html('<h2>'+totalQuestions+'question</h2><h1>Are you ready</h1>');
+        $('div#slides-content').html('<h2>'+totalQuestions+' questions</h2><h1>Are you ready</h1>');
     }
 
     function secondStart(numQuestion,totalQuestions,titleQuestion){
