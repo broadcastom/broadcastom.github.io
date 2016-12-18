@@ -128,13 +128,14 @@ $(function(){
                 event: 'secondStart',
                 numQuestion: nm,
                 totalQuestion: totalQ,
+                slideImg : images[counter],
                 titleQuestion: titlesQuestions[counter]
             };
             phone.pubnub.publish({
                 channel: channel + '-stream',
                 message: data,
                 callback: function (m) {
-                    secondStart(nm,totalQ,titlesQuestions[counter]);
+                    secondStart(nm,totalQ,titlesQuestions[counter],images[counter]);
                 }
             });
 
@@ -236,6 +237,7 @@ $(function(){
             event: 'secondStart',
             numQuestion: nm,
             totalQuestion: totalQ,
+            slideImg : images[counter],
             titleQuestion: titlesQuestions[counter]
 
         };
@@ -243,7 +245,7 @@ $(function(){
             channel: channel + '-stream',
             message: data,
             callback: function (m) {
-                secondStart(nm,totalQ,titlesQuestions[counter]);
+                secondStart(nm,totalQ,titlesQuestions[counter],images[counter]);
             }
         });
 
@@ -438,7 +440,7 @@ $(function(){
                     break;
 
                 case 'secondStart':
-                    secondStart(m.numQuestion, m.totalQuestion, m.titleQuestion);
+                    secondStart(m.numQuestion, m.totalQuestion, m.titleQuestion,m.slideImg);
                     break;
 
                 case 'thirdStart':
@@ -492,18 +494,20 @@ $(function(){
         $('div#slides-content').html('<h2>'+totalQuestions+' questions</h2><h1>Are you ready</h1>');
     }
 
-    function secondStart(numQuestion,totalQuestions,titleQuestion){
+    function secondStart(numQuestion,totalQuestions,titleQuestion,slideImg){
         $('body').removeClass('multiColor').addClass('backgroundBlue');
         $('div.answer-content').show(300);
+        $('div#slides-content').html('<img src="' + slideImg + '" class="images-slides">');
         $('div#header-content-broadcaster').html('<h2>Question '+numQuestion+'</h2><h3> '+titleQuestion+' </h3>');
-        $('div#slides-content').html('<h1>Question '+numQuestion+' of '+totalQuestions+'</h1><h3>For up to 1000 points</h3>');
+        $('div#slides-title').html('<h1>Question '+numQuestion+' of '+totalQuestions+'</h1><h3>For up to 1000 points</h3>');
     }
 
     function thirdStart(titleQuestion,totalAnswers,slideImg,correctAnsw){
+        $('div#slides-title').html('');
         $('div.answer-content').hide(300);
-        $('div#slides-content').html('<img src="' + slideImg + '" class="images-slides">');
         $('body').removeClass('backgroundBlue'); 
         $('div#header-content-broadcaster').html('<p>'+titleQuestion+'</p>');
+         $('div#slides-content').show(300);
         
         $('div#responses').html('');
         for(var i=1;i<=totalAnswers;i++){
@@ -525,6 +529,7 @@ $(function(){
     }
 
     function generateCharacteristicAnswers(totalAnswers){
+         $('div#slides-content').hide(300);
         $('#slides-content').html('');
         $('div.watchOpacity').css('opacity','0.2');
         $('span#correct-answer').show(300);
