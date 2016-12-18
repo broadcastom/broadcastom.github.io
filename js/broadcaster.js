@@ -527,8 +527,8 @@ $(function(){
         $('div.dvCount').hide(200);
         
         $('div#slides-content').append('<div style="background-color: #eee;margin: 5px;height:50px" class="col-sm-12">' +
-            '<span class="nameStudent pull-left"><h3>'+name+'</h3></span>' +
-            '<span class="nameStudent pull-right"><h3>'+points+'</h3></span></div>')
+            '<span class="nameStudent pull-left">'+name+'</span>' +
+            '<span class="nameStudent pull-right">'+points+'</span></div>')
        
     }
 
