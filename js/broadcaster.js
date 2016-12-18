@@ -501,10 +501,10 @@ $(function(){
 
     function thirdStart(titleQuestion,totalAnswers,slideImg,correctAnsw){
         $('div.answer-content').hide(300);
-        $('body').removeClass('backgroundBlue');
-        $('div#header-content-broadcaster').html('<p>'+titleQuestion+'</p>');
         $('div#slides-content').html('<img src="' + slideImg + '" class="images-slides">');
-
+        $('body').removeClass('backgroundBlue'); 
+        $('div#header-content-broadcaster').html('<p>'+titleQuestion+'</p>');
+        
         $('div#responses').html('');
         for(var i=1;i<=totalAnswers;i++){
             if(i == correctAnsw) {
