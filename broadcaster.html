@@ -28,17 +28,43 @@
 <div class="container">
     <div class="row">
 
-        <div class="answer-content col-sm-12" style="z-index: 5">
+        <div class="answer-content text-center col-sm-12" style="z-index: 5">
             <div class="dv-launch text-center">
-                <button id="launch" class="btn btn-primary btn-lg sharp">Launch &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" id="code-site" class="form-control" placeholder="Code site" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="code-event" class="form-control" placeholder="Code event" required>
+                    </div>
+                    <button id="launch" type="button" class="btn btn-primary">Launch &nbsp;<i class="glyphicon glyphicon-camera"></i></button>
+                </form>
+
             </div>
 
-            <div class="dv-next pull-right text-right" style="display: none">
-                <button id="next-slide" class="btn btn-primary">Next &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+            <br>
+            <div class="dv-joint-animators text-center col-sm-12">
+
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" id="code-channel" class="form-control" placeholder="Code pin" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="classroom" class="form-control" placeholder="Classroom" required>
+                    </div>
+                    <button type="button" id="joint-stream-animators" class="btn btn-primary">Joint &nbsp;<i class="glyphicon glyphicon-eye-open"></i></button>
+                </form>
+
             </div>
+
 
         </div>
 
+        <div class="dv-next text-right" style="display: none;z-index: 5">
+            <button id="next-slide" style="display: none" class="btn btn-primary">Next &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+            <button id="get-scoreboard" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+        </div>
         <div id="loading-page" style="display: none" class="col-sm-12">
             <img src="images/banner_welcom.png" class="images-slides">
         </div>
@@ -50,7 +76,7 @@
 
 
             <div class="col-sm-8 text-center row" style="margin: 10px 0 10px 0">
-                <div id="video-stream" class="col-sm-12 text-center"></div>
+                <div style="background-color: #eee" id="video-stream" class="col-sm-12 text-center"></div>
                 <div id="stream-info" hidden="true" class="dvStream">
                     <button id="end-stream" class="btn btn-danger" hidden="true">Done</button>
                     <span class="glyphicon glyphicon-user" title="Animators"></span>
@@ -60,18 +86,22 @@
 
 
             <div class="col-sm-2 text-center dvStream">
-                <button id="start-now" disabled="disabled" class="btn btn-primary">Start now &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+                <button id="start-now" class="btn btn-primary">Start now &nbsp;<i class="glyphicon glyphicon-play"></i></button>
             </div>
         </div>
 
 
-        <div class="slides-content col-sm-12 row">
-            <div class="col-sm-3">&nbsp;</div>
-            <div id="slides-content" class="col-sm-6">&nbsp;</div>
-            <div class="col-sm-3">&nbsp;</div>
+        <div class="slides-content text-center col-sm-12 row">
+            <div class="col-sm-2">
+                <div class="countdown numberCircle dvCount" style="display: none"></div>
+            </div>
+            <div id="slides-content" class="col-sm-8 text-center">&nbsp;</div>
+            <div class="countAnswer dvCount col-sm-2" style="display: none">0 Answer</div>
         </div>
 
-        <div id="responses" class="slides-content col-sm-12 row">
+        <div class="slides-content col-sm-12 row">
+            <div id="responses" class="row">
+            </div>
         </div>
 
     </div>
