@@ -11,25 +11,6 @@ $(function(){
     var IntervalNum = 20;
     var totalQ = 4;
 
-    /*var Cdown = function() {
-        $('.countdown').each(function () {
-            var count = parseInt($(this).html());
-            if (count !== 0) {
-                $(this).html(count - 1);
-            }else{
-                //alert('finish');
-                clearInterval(countInterval);
-                $('div#slides-content').html('');
-
-                for(var i=1;i<=4;i++){
-                    $('div#slides-content').append('<div class="col-sm-3 text-center answer-'+i+
-                        '" style="color: #ffffff ;border: 2px solid #ffffff">'+i+'</div>')
-                }
-            }
-        });
-    };*/
-
-
     var counter = 0;
     var channel;
 
@@ -190,7 +171,7 @@ $(function(){
                              }else{
                                  //alert('finish');
                                  clearInterval(countInterval);
-
+                                 $('#get-scoreboard').removeAttr('disabled');
                                  var data = {
                                      event: 'showCorrectAnswer',
                                      totalAnswers: 4,
@@ -227,7 +208,7 @@ $(function(){
             channel: channel + '-stream',
             message: data,
             callback: function (m) {
-
+                $('#get-scoreboard').attr('disabled','disabled');
                 $('#get-scoreboard').hide(300);
                 $('#next-slide').show(300);
                 $('div#responses').html('');
@@ -292,7 +273,7 @@ $(function(){
                                 IntervalNum--;
                             }else{
                                 clearInterval(countInterval);
-
+                                $('#get-scoreboard').removeAttr('disabled');
                                 var data = {
                                     event: 'showCorrectAnswer',
                                     totalAnswers: 4,
