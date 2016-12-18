@@ -467,6 +467,7 @@ $(function(){
 
     function firstStart(object,totalQuestions){
         $('body').removeClass('multiColor');
+         $('div#slides-content').hide(300);
         $('div.jumbotron').removeClass('header-content');
         $('div.dvStream').hide();
         //$('div#first-page').css({"position": "absolute", "z-index": "0"});
@@ -511,7 +512,6 @@ $(function(){
     }
 
     function generateCharacteristicAnswers(totalAnswers){
-         $('div#slides-content').hide(300);
         $('#slides-content').html('');
         $('div.watchOpacity').css('opacity','0.2');
         $('span#correct-answer').show(300);
