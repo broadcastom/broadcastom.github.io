@@ -57,7 +57,7 @@ div.answer-students{
 }
 
 .slides-content{
-    display: none;
+    /*display: none;*/
     margin: 15px;
 }
 
@@ -65,7 +65,7 @@ div.answer-students{
     margin: 15px;
 }
 
-.header-content h1{
+.header-content{
     color: #f5f5f5;
 }
 .colorWhite{
@@ -74,6 +74,7 @@ div.answer-students{
 
 video{
     width: 100%;
+    margin: 5px 0 0 0;
 }
 /*.vid-small{
     width: 200px;
@@ -90,4 +91,33 @@ video{
 .sharp {
     border-radius:0;
     margin-top: 30px;
+}
+
+/*
+.numberCircle {
+    border-radius: 50%;
+    !*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!
+
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 32px Arial, sans-serif;
+}*/
+
+.numberCircle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    padding: 8px;
+    background: #fff;
+    border: 3px solid #666;
+    color: #666;
+    text-align: center;
+    font: 52px Arial, sans-serif;
 }
