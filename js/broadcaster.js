@@ -52,24 +52,7 @@ $(function(){
         $('div#loading-page').show(300);
         $('div#header-content-broadcaster h1').html('READY TO JOIN?');
 
-        /*var url ='http://localhost/monProjet/wp-json/wp/v2/media?parent='+codeEvent;
-
-        $.getJSON(url, function(result){
-            $.each(result, function(i, field){
-                
-                if(field.media_type == 'image'){
-                    images[i] = field.source_url;
-                }
-            });
-
-            $('.answer-content').hide(300);
-            $('div#loading-page').hide(300);
-
-            $('div#first-page').show(300);
-            $('div#header-content-broadcaster').html('<h2 style="color: #f5f5f5">'+channel+'</h2><p style="color: #f5f5f5">is your code pin</p>');
-
-
-        });*/
+        
 
         $('.answer-content').hide(300);
         $('div#loading-page').hide(300);
@@ -382,12 +365,11 @@ $(function(){
             });
             //console.log("Joining stream  " + num);
             // Get state by uuid.
-            phone.pubnub.state({
+            /*phone.pubnub.state({
                 channel  : num+'-stream',
                 uuid     : num,
                 callback : function(m){
-                    //console.log(m.eventId);
-
+                    
                     var url ='http://localhost/monProjet/wp-json/wp/v2/media?parent='+m.eventId;
                     $.getJSON(url, function(result) {
 
@@ -401,14 +383,14 @@ $(function(){
 
                         });
 
-                       // console.log(images);
+                     
                     });
                 },
                 error    : function(m){
-                    //console.log(m)
+                   
                     alert('ERROR'+m);
                 }
-            });
+            });*/
         });
         ctrl.receive(function(session){
             session.connected(function(session){
