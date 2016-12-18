@@ -478,6 +478,7 @@ $(function(){
     }
 
     function secondStart(numQuestion,totalQuestions,titleQuestion,slideImg){
+        $('div#slides-content').hide(300);
         $('body').removeClass('multiColor').addClass('backgroundBlue');
         $('div.answer-content').show(300);
         $('div#slides-content').html('<img src="' + slideImg + '" class="images-slides">');
