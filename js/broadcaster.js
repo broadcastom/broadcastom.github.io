@@ -48,11 +48,11 @@ $(function(){
         //channel = codeSite+''+codeEvent;
 
         //$(this).hide(300);
-        $('div.answer-content').html('<span class="spn-loading glyphicon glyphicon-refresh glyphicon-refresh-animate" style="font-size:48px"></span>');
+        /*$('div.answer-content').html('<span class="spn-loading glyphicon glyphicon-refresh glyphicon-refresh-animate" style="font-size:48px"></span>');
         $('div#loading-page').show(300);
         $('div#header-content-broadcaster h1').html('READY TO JOIN?');
 
-       /*var url ='http://localhost/monProjet/wp-json/wp/v2/media?parent='+codeEvent;
+        var url ='http://localhost/monProjet/wp-json/wp/v2/media?parent='+codeEvent;
         $.getJSON(url, function(result){
             $.each(result, function(i, field){
                 
