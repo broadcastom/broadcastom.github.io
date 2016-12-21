@@ -28,7 +28,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="answer-content text-center col-sm-12" style="z-index: 5">
+        <div id="form-action" class="text-center col-sm-12" style="z-index: 5">
             <div class="dv-launch text-center">
 
                 <form class="form-inline">
@@ -53,6 +53,10 @@
                     <div class="form-group">
                         <input type="text" id="classroom" class="form-control" placeholder="Classroom" required>
                     </div>
+
+                    <div class="form-group">
+                        <input type="text" id="nickname" class="form-control" placeholder="Nickname" required>
+                    </div>
                     <button type="button" id="joint-stream-animators" class="btn btn-primary">Joint &nbsp;<i class="glyphicon glyphicon-eye-open"></i></button>
                 </form>
 
@@ -64,8 +68,9 @@
         <div class="dv-next text-right" style="display: none;z-index: 5">
             <button id="next-slide" style="display: none" class="btn btn-primary">Next &nbsp;<i class="glyphicon glyphicon-play"></i></button>
             <button id="get-scoreboard" disabled="disabled" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-play"></i></button>
+            <button id="end-quiz" class="btn btn-info" style="display: none">End &nbsp;<i class="glyphicon glyphicon-play"></i></button>
         </div>
-        <div id="loading-page" style="display: none" class="col-sm-12">
+        <div id="welcome-page" style="display: none" class="col-sm-12">
             <img src="images/banner_welcom.png" class="images-slides">
         </div>
 
@@ -96,18 +101,41 @@
                 <div class="countdown numberCircle dvCount" style="display: none"></div>
             </div>
             <div class="col-sm-8 text-center">
-                <div style="display:none" id="slides-content">&nbsp;</div>
-                <div id="slides-title">&nbsp;</div>
+                <div id="scoreboard-content"></div>
+                <div style="display:none" id="slides-content"></div>
+                <div id="slides-title"></div>
             </div>
             <div class="countAnswer dvCount col-sm-2" style="display: none">0 Answer</div>
         </div>
 
-        <div class="slides-content col-sm-12 row">
-            <div id="responses" class="row">
+        <div id="dv-feedBack" class="text-center col-sm-12" style="display: none">
+            <button id="feedBack" type="button" class="btn btn-lg btn-primary">Feedback and results</button>
+        </div>
+
+
+        <div class="col-sm-12 row">
+            <div id="responses" style="display: none" class="row">
             </div>
         </div>
 
     </div>
+
+
+
+
+
+
+    <div id="dv-classroom-with-students" class="container text-center row hidden">
+
+    </div>
+
+
+    <div id="rate-quiz" class="container text-center row" style="display: none">
+
+        <div class="col-sm-1 col-md-offset-5" style="background-color: #5F991F;border: 2px solid #ffffff"><h2><span class="glyphicon glyphicon-thumbs-up"></span></h2></div>
+        <div class="col-sm-1" style="background-color: #DE1831;border: 2px solid #ffffff"><h2><span class="glyphicon glyphicon-thumbs-down"></span></h2></div>
+    </div>
+
 </div>
 
 
