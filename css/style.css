@@ -13,16 +13,17 @@
 }
 /*---------------------End-----------------------*/
 
-div.answer-content{
+/*div.answer-content{
     margin: 0 0 15px 0;
-    /*border: solid;*/
-}
+    !*border: solid;*!
+}*/
 
 div.answer-broadcaster{
     border-radius: 10px;
     /*border: 2px solid #73AD21;*/
     padding: 10px;
     height: 100px;
+    margin-top: 15px;
 }
 
 div.answer-students{
