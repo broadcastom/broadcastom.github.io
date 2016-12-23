@@ -30,6 +30,8 @@ $(function(){
     var correctAnswers = ['1','3','4','2'];
     var arrayUsersAndPoints = [];
 
+    var arrayClassroomElement = [];
+
     for (var i = 0; i <= 6; i++) {
         arrayUsersAndPoints.push({
             name: 'student'+i,
@@ -118,6 +120,7 @@ $(function(){
             channel: channel + '-stream',
             message: data,
             callback: function (m) {
+
                 firstStart(object, totalQ);
             }
         });
@@ -355,6 +358,30 @@ $(function(){
     });
 
 
+    $('#hereNow').click(function(){
+        //  Return state
+
+        phone.pubnub.here_now({
+            channel : streamName + '-stream',
+            state : true,
+            callback : function(m){
+                console.log(m.uuids);
+                var uid;
+                var stat;
+                $.each(m.uuids,function(index,value){
+                    uid = value.uuid;
+
+                    if(uid.includes('-classroom')){
+                        var classrm = uid.replace('-classroom','');
+                        stat = value.state['nickname'];
+                        getJoinedClassroom(classrm, stat);
+                    }
+
+                });
+            }
+        });
+    })
+
     $('#end-stream').click(function(){
         end();
     });
@@ -364,8 +391,8 @@ $(function(){
         streamName = channel+'';
         var phone = window.phone = PHONE({
             number        : streamName, // listen on username line else random
-            publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
-            subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
+            publish_key   : 'pub-c-8e45f540-691c-4e55-9f07-f2278795ec3d', // Your Pub Key
+            subscribe_key : 'sub-c-b5732f80-4ccf-11e6-8b3b-02ee2ddab7fe', // Your Sub Key
             uuid : streamName,
             oneway        : true,
             broadcast     : true,
@@ -376,19 +403,19 @@ $(function(){
             ctrl.addLocalStream(video_out);
             ctrl.stream();
 
-            /*phone.pubnub.state({
+            phone.pubnub.state({
                 channel  : streamName+'-stream',
                 state    : {
                     "eventId" : codeEvent
                 },
                 callback : function(m){
-                    console.log(m);
+                    //console.log(m);
                 },
                 error    : function(m){
                     //console.log(m)
                     alert('ERROR'+m);
                 }
-            });*/
+            });
 
             stream_info.hidden=false;
             end_stream.hidden =false;
@@ -399,18 +426,29 @@ $(function(){
             session.ended(function(session) { console.log(session.number + " has left."); console.log(session)});
         });
         ctrl.streamPresence(function(m){
-            console.log(m);
+            //console.log(m.uuid);
+
+            var classrm = m.uuid;
+
+            if(classrm.includes('-classroom')){
+                classrm = classrm.replace('-classroom','');
+                var nicknam = m.data['nickname'];
+                getJoinedClassroom(classrm, nicknam);
+            }else{
+                //console.log('noooooooooo');
+            }
+
             here_now.innerHTML=m.occupancy;
             //console.log(m.occupancy + " currently watching.");
             $('span.player-here-now').text(m.occupancy+'')
         });
         ctrl.streamReceive(function(m){
             //console.log(m);
-            switch(m.event){
+            /*switch(m.event){
                 case 'jointAnimator':
                     getJoinedClassroom(m.classroom, m.nickname);
                     break;
-            }
+            }*/
         });
         return false;
     }
@@ -419,39 +457,29 @@ $(function(){
         var num = streamName;
         var phone = window.phone = PHONE({
             number        : "Viewer" + Math.floor(Math.random()*100), // listen on username line else random
-            publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
-            subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
-            uuid          : nickname,
+            publish_key   : 'pub-c-8e45f540-691c-4e55-9f07-f2278795ec3d', // Your Pub Key
+            subscribe_key : 'sub-c-b5732f80-4ccf-11e6-8b3b-02ee2ddab7fe', // Your Sub Key
+            uuid          : classroom+'-classroom',
             oneway        : true
         });
         var ctrl = window.ctrl = CONTROLLER(phone, get_xirsys_servers);
         ctrl.ready(function(){
             ctrl.isStreaming(num, function(isOn){
                 if (isOn){
-                    ctrl.joinStream(num);
+                    //console.log(isOn);
 
-                    phone.pubnub.state({
-                        channel : num+'-stream',
-                        state : {
-                            "classroom" : classroom
-                        },
-
-                        callback : function(m){
-                            //console.log(JSON.stringify(m))
-                            var data = {
-                                event: 'jointAnimator',
-                                classroom: classroom,
-                                nickname: nickname
-                            };
-                            phone.pubnub.publish({
-                                channel: num + '-stream',
-                                message: data,
-                                callback: function (m) {
-                                    getJoinedClassroom(classroom,nickname);
-                                }
-                            });
+                    ctrl.isClassroomExist(num,classroom+'-classroom',function(isExist){
+                        console.log(isExist);
+                        if(isExist == -1){
+                            ctrl.joinStream(num,nickname);
                         }
+                        else{
+                            alert("Classroom Exist!");
+                            window.location.reload();
+                        }
+
                     });
+
 
                 }
                 else{ alert("User is not streaming!");
@@ -460,24 +488,22 @@ $(function(){
             //console.log("Joining stream  " + num);
             // Get state by uuid.
             /*phone.pubnub.state({
-             channel  : num+'-stream',
-             uuid     : num,
-             callback : function(m){
+                 channel  : num+'-stream',
+                 uuid     : num,
+                 callback : function(m){
 
-             var url ='http://localhost/monProjet/wp-json/wp/v2/media?parent='+m.eventId;
-             $.getJSON(url, function(result) {
-
-             $.each(result, function (i, field) {
-
-             if (field.media_type == 'image') {
-             images[i] = field.source_url;
-             }
-             });
-             });
-             },
-             error    : function(m){
-             alert('ERROR'+m);
-             }
+                     var url ='http://localhost/monProjet/wp-json/wp/v2/media?parent='+m.eventId;
+                     $.getJSON(url, function(result) {
+                         $.each(result, function (i, field) {
+                             if (field.media_type == 'image') {
+                                images[i] = field.source_url;
+                             }
+                         });
+                     });
+                 },
+                 error    : function(m){
+                    alert('ERROR'+m);
+                 }
              });*/
         });
         ctrl.receive(function(session){
@@ -490,12 +516,48 @@ $(function(){
                 $('div#welcome-page').hide(300);
                 $('div#header-content-broadcaster').html('<h2 style="color: #f5f5f5">'+streamName+'</h2><p style="color: #f5f5f5">as joined</p>');
                 $('div#first-page').show(300);
+
+
+                /*phone.pubnub.here_now({
+                    channel : num + '-stream',
+                    state : true,
+                    callback : function(m){
+                        console.log(m)
+                    }
+                });*/
+
             });
 
             session.ended(function(session) { console.log(session.number + " has left."); });
         });
         ctrl.streamPresence(function(m){
-            console.log(m);
+
+            var classrm = m.uuid;
+
+
+            if(classrm.includes('-classroom')){
+                //classrm = classrm.replace('-classroom','');
+
+
+                phone.pubnub.state({
+                    channel  : num+'-stream',
+                    uuid     : classrm,
+                    callback : function(m){
+                        //console.log(m.nickname);
+                        classrm = classrm.replace('-classroom','');
+                        var nicknam = m.nickname;
+                        getJoinedClassroom(classrm, nicknam);
+                    },
+                    error    : function(m){
+                        alert('ERROR'+m);
+                    }
+                });
+
+
+            }else{
+                //console.log('noooooooooo');
+            }
+
             here_now.innerHTML=m.occupancy;
             //console.log(m.occupancy + " currently watching.");
         });
@@ -562,6 +624,7 @@ $(function(){
     }
 
     function firstStart(object,totalQuestions){
+        $('#dv-classroom-with-students').hide(300);
         $('body').removeClass('multiColor');
         $('div#slides-content').hide(300);
         $('div.jumbotron').removeClass('header-content');
@@ -653,7 +716,7 @@ $(function(){
     function getJoinedClassroom(classrom,animator){
         $('div#dv-classroom-with-students').append('<div class="col-sm-4">'+
             '<ul class="list-group list-classroom-students">'+
-            '<li class="list-group-item active"><h3>'+classrom+' <span class="badge">12</span></h3></li>'+
+            '<li class="list-group-item active"><h3>'+classrom+' <span class="badge">0</span></h3></li>'+
             '<li class="list-group-item list-group-item-info"><h4>'+animator+' <span class="badge">prof</span></h4></li>'+
             '</ul> </div>');
     }
@@ -665,8 +728,8 @@ $(function(){
     }
 
 
-    function rateQuiz(title){
-        $('div#header-content-broadcaster').html('<h1>And the winner is... </h1>');
+    function rateQuiz(){
+        $('div#header-content-broadcaster').html('<h1>Rate this quiz </h1>');
         $('div#slides-content').hide(300);
         $('div#slides-content').html('');
         $('#rate-quiz').show(300);
