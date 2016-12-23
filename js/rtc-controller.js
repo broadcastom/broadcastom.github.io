@@ -84,11 +84,15 @@ var CONTROLLER = window.CONTROLLER = function(phone, serverFunc){
 		vid.appendChild(video);
     };
     
-    function stream_subscribe(name){
+    function stream_subscribe(name,nickname){
 	    var ch = (name ? name : phone.number()) + "-stream";
 	    pubnub.subscribe({
             channel    : ch,
             message    : streamreceivecb,
+
+			state : {
+				"nickname" : nickname
+			},
             presence   : streamprescb,
             connect    : function() { stream_name = ch; console.log("Streaming channel " + ch); }
         });
@@ -98,8 +102,8 @@ var CONTROLLER = window.CONTROLLER = function(phone, serverFunc){
 	    stream_subscribe();
     }
     
-    CONTROLLER.joinStream = function(name){
-	    stream_subscribe(name);
+    CONTROLLER.joinStream = function(name,nickname){
+	    stream_subscribe(name,nickname);
 	    publishCtrl(controlChannel(name), "userJoin", phone.number());
     }
     
@@ -176,11 +180,28 @@ var CONTROLLER = window.CONTROLLER = function(phone, serverFunc){
 		pubnub.here_now({
 			channel : number,
 			callback : function(m){
-				console.log(m);  // TODO Comment out
+				//console.log(m);  // TODO Comment out
 				cb(m.occupancy != 0);
 			}
 		});
 	};
+
+
+
+	CONTROLLER.isClassroomExist = function(number,classroom ,cb){
+		pubnub.here_now({
+			channel : number+'-stream',
+			callback : function(m){
+				console.log(m);  // TODO Comment out
+				cb($.inArray(classroom, m.uuids)) ;
+				//console.log(cb);
+
+
+
+			}
+		});
+	};
+
 	
 	CONTROLLER.isStreaming = function(number, cb){
 		CONTROLLER.isOnline(number+"-stream", cb);
@@ -228,7 +249,9 @@ var CONTROLLER = window.CONTROLLER = function(phone, serverFunc){
 		pubnub.publish({ 
 			channel: ch,
 			message: msg,
-			callback : function(m){console.log(m)}
+			callback : function(m){
+				//console.log(m)
+			}
 		});
 	}
 	
