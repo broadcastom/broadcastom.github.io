@@ -476,6 +476,7 @@ $(function(){
                         else{
                             alert("Classroom Exist!");
                             window.location.reload();
+                            return;
                         }
 
                     });
